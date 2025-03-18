@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Assistant</title>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --success: #2ECC71;
+            --danger: #E74C3C;
+            --text: #2C3E50;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --border: #E2E8F0;
+            --hover: #EDF2F7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            width: 320px;
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 24px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            padding: 6px;
+            background: var(--primary);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .title {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .status-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 16px;
+        }
+
+        .status-label {
+            font-size: 14px;
+            color: #64748B;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        /* Toggle switch styles */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--success);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+        }
+
+        .status-text {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        .status-active {
+            color: var(--success);
+            background: rgba(46, 204, 113, 0.1);
+        }
+
+        .status-inactive {
+            color: var(--danger);
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .attendance-input {
+            width: 80px;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .save-btn {
+            padding: 8px 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            opacity: 0.9;
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #64748B;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="assets/logo.svg" alt="Logo">
+            </div>
+            <h1 class="title">Attendance Assistant</h1>
+        </div>
+
+        <div class="status-card">
+            <div class="status-label">Extension Status</div>
+            <div class="toggle-container">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="attendanceToggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="status-text status-inactive" id="statusText">Inactive</span>
+            </div>
+        </div>
+
+        <div class="status-card">
+            <div class="status-label">Required Attendance (%)</div>
+            <div class="toggle-container">
+                <input type="number" id="customAttendance" min="1" max="100" placeholder="75" class="attendance-input">
+                <button id="saveAttendance" class="save-btn">Save</button>
+            </div>
+            <div style="font-size: 12px; color: #64748B; margin-top: 8px;">Default: 75% if not specified</div>
+        </div>
+
+        <div class="footer">
+            Made with ❤️ by <a href="https://github.com/phoenixdev100" target="_blank">Deepak</a>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>
