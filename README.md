@@ -4,7 +4,7 @@
   <img src="assets/logo.svg" alt="Attendance Assistant Logo" width="128" height="128">
 </div>
 
-A smart browser extension that helps you track and manage your attendance automatically. With a beautiful, modern interface and simple controls, staying on top of your attendance has never been easier.
+A smart Chrome extension that helps you track and manage your attendance automatically. With a beautiful, modern interface and simple controls, staying on top of your attendance has never been easier.
 
 ## Features
 
@@ -34,13 +34,11 @@ A smart browser extension that helps you track and manage your attendance automa
 To modify or enhance the extension:
 
 1. Clone the repository:
-
 ```bash
-git clone https://github.com/phoenixdev100/attendance-assistant.git
+git clone https://github.com/yourusername/attendance-assistant.git
 ```
 
 2. Make your changes to the source files:
-
    - `popup.html` - Extension popup interface
    - `popup.js` - Popup functionality
    - `content.js` - Content script for webpage interaction
@@ -61,4 +59,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Credits
 
-Created with ❤️ by phoenixdev100
+Created with ❤️ by [Your Name] and contributions by phoenixdev100

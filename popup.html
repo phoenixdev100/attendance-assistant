@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +20,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            transition: all 0.3s ease;
         }
 
         body {
@@ -43,6 +43,7 @@
             margin-bottom: 24px;
             padding-bottom: 15px;
             border-bottom: 2px solid var(--border);
+            animation: slideDown 0.5s ease;
         }
 
         .logo {
@@ -51,6 +52,7 @@
             border-radius: 8px;
             padding: 6px;
             background: var(--primary);
+            box-shadow: 0 4px 6px rgba(74, 144, 226, 0.1);
         }
 
         .logo img {
@@ -65,20 +67,28 @@
             font-size: 20px;
             font-weight: 600;
             color: var(--primary);
+            text-shadow: 0 1px 2px rgba(74, 144, 226, 0.1);
         }
 
         .status-card {
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease;
+            border: 1px solid var(--border);
+        }
+
+        .status-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
         }
 
         .status-label {
-            font-size: 14px;
+            font-size: 15px;
             color: #64748B;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             font-weight: 500;
         }
 
@@ -86,15 +96,13 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            gap: 15px;
         }
 
-        /* Toggle switch styles */
         .toggle-switch {
             position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 26px;
+            width: 56px;
+            height: 30px;
         }
 
         .toggle-switch input {
@@ -105,41 +113,48 @@
 
         .slider {
             position: absolute;
-            cursor: pointer;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 34px;
+            background-color: #CBD5E1;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.4s;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .slider:before {
+        .slider::before {
             position: absolute;
             content: "";
-            height: 20px;
-            width: 20px;
+            height: 24px;
+            width: 24px;
             left: 3px;
             bottom: 3px;
             background-color: white;
-            transition: .4s;
             border-radius: 50%;
+            transition: 0.4s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        input:checked+.slider {
+        input:checked + .slider {
             background-color: var(--success);
         }
 
-        input:checked+.slider:before {
-            transform: translateX(24px);
+        input:checked + .slider::before {
+            transform: translateX(26px);
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 2px var(--success);
         }
 
         .status-text {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             padding: 6px 12px;
-            border-radius: 6px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
 
         .status-active {
@@ -152,36 +167,14 @@
             background: rgba(231, 76, 60, 0.1);
         }
 
-        .attendance-input {
-            width: 80px;
-            padding: 8px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        .save-btn {
-            padding: 8px 16px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .save-btn:hover {
-            opacity: 0.9;
-        }
-
         .footer {
-            font-size: 12px;
+            font-size: 13px;
             color: #64748B;
             text-align: center;
-            margin-top: 20px;
-            padding-top: 12px;
+            margin-top: 24px;
+            padding-top: 15px;
             border-top: 1px solid var(--border);
+            animation: fadeIn 0.5s ease;
         }
 
         .footer a {
@@ -193,9 +186,55 @@
         .footer a:hover {
             text-decoration: underline;
         }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            border-radius: inherit;
+            transform: scale(0);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+
+        .ripple:active::after {
+            transform: scale(2);
+            opacity: 0;
+            transition: 0s;
+        }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="header">
@@ -204,32 +243,23 @@
             </div>
             <h1 class="title">Attendance Assistant</h1>
         </div>
-
-        <div class="status-card">
-            <div class="status-label">Extension Status</div>
+        
+        <div class="status-card ripple">
+            <div class="status-label">Attendance Tracking</div>
             <div class="toggle-container">
+                <span class="status-text" id="statusText">Inactive</span>
                 <label class="toggle-switch">
-                    <input type="checkbox" id="attendanceToggle">
+                    <input type="checkbox" id="toggleButton">
                     <span class="slider"></span>
                 </label>
-                <span class="status-text status-inactive" id="statusText">Inactive</span>
             </div>
-        </div>
-
-        <div class="status-card">
-            <div class="status-label">Required Attendance (%)</div>
-            <div class="toggle-container">
-                <input type="number" id="customAttendance" min="1" max="100" placeholder="75" class="attendance-input">
-                <button id="saveAttendance" class="save-btn">Save</button>
-            </div>
-            <div style="font-size: 12px; color: #64748B; margin-top: 8px;">Default: 75% if not specified</div>
         </div>
 
         <div class="footer">
-            Made with ❤️ by <a href="https://github.com/phoenixdev100" target="_blank">Deepak</a>
+            v1.0.0 • Made with ❤️ by <a href="https://github.com/phoenixdev100" target="_blank">phoenixdev100</a>
         </div>
     </div>
+
     <script src="popup.js"></script>
 </body>
-
 </html>
